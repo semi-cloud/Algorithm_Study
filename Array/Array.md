@@ -127,18 +127,53 @@ public class Main {
    + 반시계 방향인 왼쪽,아래쪽,오른쪽,위쪽 순서대로 탐색해나가다가, 배열의 끝에 다다르면 다음 순서 방향으로 전환(~~애초에 라인 단위로 구역을 나누고 시작했으면 상하좌우 라인마다 돌아야 하는 방향이 정해져서 고려 안해도 되는 부분..~~) 
    + 탐색 순서 : (1,1)에서 시작해 BFS를 이용하여 탐색(바깥,안쪽 구분 X)
  
- > 문제를 부분으로 쪼개어(DIVIDE) 생각해 해결(1차)
- ```java
- 
- ```
+ > 문제를 부분으로 쪼개어(DIVIDE) 생각해 해결!!
+
 ##### :bulb: Solution
  + 박스의 수 만큼 r회 돌리기를 반복하며, 바깥쪽 박스를 반시계 방향으로 이동시킨후 안쪽 박스도 차례대로 이동
  + 박스의 수? : 전체 배열의 크기 (N,M)중 최솟값의 절반
  > 1. 바깥배열과 안쪽을 구분하여 바깥만 순환하는 방법?
-  + 
+   ```java
+     int cnt = N < M ? N : M;
+     for(int i = 0; i < cnt / 2 ; i++ ) {
+        	rotate(i, 2*n  + 2* m - 4);     //시작지점, 박스의 크기(길이)
+        	n-=2;
+        	m-=2;
+        }     
+   ```
 
  > 2. 배열을 반시계 방향으로 이동하는 방법?
   + 라인 단위로 이동함. 한 라인에 대해 먼저 이동한후, 반시계 방향 차례로 나머지 3개의 라인도 이동
   + 회전횟수를 r mod 박스칸수로 지정하여 r의 값이 무한정 커질때의 성능을 대비
-  + (0,0)에서 (1,0)로 이동은 1번/13번/25번 회전하나 모두 같은 결과
+    + (0,0)에서 (1,0)로 이동은 1번/13번/25번 회전하나 모두 같은 결과
+    ```java
+    public static void rotate(int start, int len) {
+		int rotate = r % len;
+		for(int i = 0; i < rotate ; i++) {  //회전 횟수만큼 돌리기
+			
+			int startNum = map[start][start];
+			int row = start;
+			int col = start;
+			
+			int k = 0;
+			while(k < 4) {      //4개의 라인 다 돌기
+				int nrow = row + dx[k];
+				int ncol = col + dy[k];
+
+				if(nrow == start && ncol == start) {break;}  //루프 종료 조건(옮기려는 대상이 시작 위치)
+				
+				if(nrow >= start && ncol >= start && nrow < N-start && ncol < M-start) { 			//박스마다 배열의 범위 값이 변화
+					map[row][col] = map[nrow][ncol];     //시계방향으로 이동
+					row = nrow;
+					col = ncol;                    
+				}else {                      //한 라인이 끝날 시 방향 전환하고 다음 라인으로 이동
+					k++;
+				}
+			}
+			map[start+1][start] = startNum;  
+		}
+		
+	}
+    ```
+  
  
