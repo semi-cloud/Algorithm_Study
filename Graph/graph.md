@@ -7,10 +7,10 @@
   +  G = (V,E)
     + `V(vertex)` : 정점들의 집합
     + `E(edge)` : 정점을 연결하는 간선들의 집합
-    > |V|개 그래프에는 최대 |V|(|V|-1) / 2 개의 간선 가능
+  > |V|개 그래프에는 최대 |V|(|V|-1) / 2 개의 간선 가능
   + 선형과 트리 자료구조로 표현하기 어려운, N : N 관계의 객체 표현 용이
   
-  ![SYsNnEB](https://user-images.githubusercontent.com/71436576/126340242-9e719b1f-7c74-4fbf-b92e-38d36b83946c.png)
+  ![SYsNnEB](https://user-images.githubusercontent.com/71436576/126340242-9e719b1f-7c74-4fbf-b92e-38d36b83946c.png){: width="400" height="300"}
   
 #### 2) 그래프의 종류
   + (1) 무방향 그래프(undirected)
