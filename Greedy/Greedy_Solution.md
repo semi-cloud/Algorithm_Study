@@ -19,7 +19,7 @@
       int total = 0;
       ...
       if(i == 0) { temp *= -1;}  //이 조건이 꼭 필요하다!
-			total = total - temp;
+      total = total - temp;
   ```   
 
 #### 11047
@@ -29,22 +29,22 @@
  + 동전의 갯수를 줄이려면, 최적의 선택은 **가장 큰 금액의 동전을 택하는것**
 
  > 초기 풀이방법
- 1.큰 금액 순서대로 동전 배열 정렬</br>
- 2.k보다 작은 동전 중 가장 큰 것 을 계속 택하고, (k - 동전의 합)이 현재 동전의 금액보다 작으면 중지</br>
- 3.다음 큰 금액의 동전을 택하기를 반복.. 동전의 합이 k 와 같아지면 반복문 종료
+ + 1.큰 금액 순서대로 동전 배열 정렬</br>
+ + 2.k보다 작은 동전 중 가장 큰 것 을 계속 택하고, (k - 동전의 합)이 현재 동전의 금액보다 작으면 중지</br>
+ + 3.다음 큰 금액의 동전을 택하기를 반복.. 동전의 합이 k 와 같아지면 반복문 종료
   
  ```java   
-		n = Integer.parseInt(st.nextToken());    //금액이 서로 다른 동전의 갯수
-		k = Integer.parseInt(st.nextToken());    //동전의 합
-		coinVal = new int[n];
+	n = Integer.parseInt(st.nextToken());    //금액이 서로 다른 동전의 갯수
+	k = Integer.parseInt(st.nextToken());    //동전의 합
+	coinVal = new int[n];
 		
-		for(int i = 0; i < coinVal.length; i++) {	 //동전 종류 입력 	
-			coinVal[i] = Integer.parseInt(br.readLine());
-		}
+	for(int i = 0; i < coinVal.length; i++) {	 //동전 종류 입력 	
+             coinVal[i] = Integer.parseInt(br.readLine());
+	}
     
-    Integer[] temp = Arrays.stream(coinVal).boxed().toArray(Integer[] :: new);  	//int형 배열 내림차순, 이 부분이 필요가 x
-		Arrays.sort(temp, Collections.reverseOrder());
-		coinVal = Arrays.stream(temp).mapToInt(i -> i).toArray();
+        Integer[] temp = Arrays.stream(coinVal).boxed().toArray(Integer[] :: new);  	//int형 배열 내림차순, 이 부분이 필요가 x
+        Arrays.sort(temp, Collections.reverseOrder());
+        coinVal = Arrays.stream(temp).mapToInt(i -> i).toArray();
    ```
    ```java
 	  int val = 0;  
@@ -57,7 +57,7 @@
     		}else { i--;} 
     		
     		if(val == k) { break; }          //목표 금액과 같아지면 반복 중지
-	    }
+	  }
    ```
   + :star2: 항상 **문제의 조건**을 잘보자!!!
     + 애초에 배열 입력 조건이 오름차순이므로, 정렬이 필요 없었음(배열 뒤에서부터 검사하면 됌)
