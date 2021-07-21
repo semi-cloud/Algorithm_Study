@@ -58,7 +58,26 @@
 
 ## Graph 탐색(1) DFS
 
+#### DFS(깊이 우선 탐색)정의
++ _더 나아갈 길이 보이지 않을 때까지 깊이 들어간다_를 원칙으로 그래프 내의 정점을 방문하는 알고리즘 
+1) 시작 정점에서 한 방향을 택해 이미 방문했던 정점이 아니면 반복해서 깊이 들어감
+2) 더 이상 방문해왔던 정점 말고는 다른 이웃을 갖고 있지 않은 정점을 만나면, 뒤로 돌아와 다른 경로로 뻗어있는 정점을 타고 방문을 재개
+  
+<image src = "https://user-images.githubusercontent.com/71436576/126510519-9b4bcbe8-db4b-4232-9d4e-889e6384ee8e.png" width="50%" height="50%">
+
+#### DFS 특징
+:heavy_check_mark: 자기 자신을 호출하는 순환 알고리즘(재귀)</br>
+:heavy_check_mark: 모든 노드를 방문하고자 하는 경우에 이 방법을 선택! (완전 탐색 알고리즘에 자주 이용됨)</br>
+:heavy_check_mark: 그래프 탐색시, 노드의 방문 여부를 반드시 검사해야함!(무한 루프에 빠질 위험이 있음)
+  
+#### DFS 구현
+> 재귀(순환 호출) 이용
+  
+> 명시적 스택 사용
+
 ## Graph 탐색(2) BFS
+
+<image src = "https://user-images.githubusercontent.com/71436576/126510793-6895c88f-1a25-4df9-8cad-28574558d7ca.png" width="50%" height="50%">
 
 ## 상호 베타 집합
 
