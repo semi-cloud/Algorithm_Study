@@ -59,7 +59,7 @@
 ## Graph 탐색(1) DFS
 
 #### DFS(깊이 우선 탐색)정의
-+ _더 나아갈 길이 보이지 않을 때까지 깊이 들어간다_를 원칙으로 그래프 내의 정점을 방문하는 알고리즘 
++ '더 나아갈 길이 보이지 않을 때까지 깊이 들어간다'를 원칙으로 그래프 내의 정점을 방문하는 알고리즘 
 1) 시작 정점에서 한 방향을 택해 이미 방문했던 정점이 아니면 반복해서 깊이 들어감
 2) 더 이상 방문해왔던 정점 말고는 다른 이웃을 갖고 있지 않은 정점을 만나면, 뒤로 돌아와 다른 경로로 뻗어있는 정점을 타고 방문을 재개
   
@@ -68,17 +68,82 @@
 #### DFS 특징
 :heavy_check_mark: 자기 자신을 호출하는 순환 알고리즘(재귀)</br>
 :heavy_check_mark: 모든 노드를 방문하고자 하는 경우에 이 방법을 선택! (완전 탐색 알고리즘에 자주 이용됨)</br>
-:heavy_check_mark: 그래프 탐색시, 노드의 방문 여부를 반드시 검사해야함!(무한 루프에 빠질 위험이 있음)
+:heavy_check_mark: 그래프 탐색시, 노드의 방문 여부를 반드시 검사해야함(무한 루프에 빠질 위험이 있음)
   
 #### DFS 구현
 > 재귀(순환 호출) 이용
-  
+  ```java
+  public static void dfs(int v) { 
+		if(visit[v]) {return;}    //이미 방문한 노드는 건너뛰기
+		
+		visit[v] = true;          //노드 방문 표시
+		
+		for(int node : graph[v]) {     //인접한 모든 노드에 대해 재귀
+			dfs1(node);		
+		}
+	}
+ ``` 
 > 명시적 스택 사용
 
 ## Graph 탐색(2) BFS
 
+#### BFS(넓이 우선 탐색)정의
++ 루트 노드(혹은 다른 임의의 노드)에서 시작한 인접 노드를 먼저 탐색하는 알고리즘
++ 시작 정점으로부터 가까운 정점을 먼저 방문하고 멀리 떨어져 있는 정점을 나중에 방문하는 순회 방법 => 깊게 X(deep), 넓게(wide) 탐색
+
 <image src = "https://user-images.githubusercontent.com/71436576/126510793-6895c88f-1a25-4df9-8cad-28574558d7ca.png" width="50%" height="50%">
 
+#### BFS 특징
+:heavy_check_mark: 재귀의 형태가 아니며, 선입선출 원칙의 큐를 사용</br>
+:heavy_check_mark: 그래프 탐색시, 노드의 방문 여부를 반드시 검사해야함</br>
+:heavy_check_mark: 두 노드 사이의 최단 경로 / 임의의 경로를 찾고 싶을 때 사용</br>
+```
+ex) 지구 상에 존재하는 모든 친구 관계를 그래프로 표현한 후 A와 B 사이에 존재하는 경로를 찾는 경우
+DFS의 경우 - 모든 친구 관계를 다 살펴봐야 할지도 모른다.
+BFS의 경우 - A와 가까운 관계부터 탐색한다.
+```
+#### BFS 구현
+
+> 큐 이용
+```java
+public static void bfs(int v) {      
+		
+		queue.offer(v);             //큐에 시작 정점 추가
+		
+		while(!queue.isEmpty()) {    
+			int n = queue.poll();    
+			
+			if(visit[n]) {continue;}   //방문한 노드면 건너뛰기
+      
+			visit[node] = true;           //큐 삽입시 노드 방문 표시
+			for(int node : graph[n]) {   //인접한 모든 정점 큐에 추가
+      	queue.add(node);  
+      }
+		}	
+		return;
+	}
+ ```
+ ```java
+ public static void bfs(int v) {      
+		
+		queue.offer(v);             //큐에 시작 정점 추가
+    visit[v] = true;
+		
+		while(!queue.isEmpty()) {    
+			int n = queue.poll();    
+		
+			for(int node : graph[n]) {   //인접한 모든 정점 큐에 추가
+        if(!visit[node]){
+          queue.add(node);  
+          visit[node] = true;           //큐 삽입시 노드 방문 표시
+        }    
+      }
+		}	
+		return;
+	}
+ ```
+ 
+  
 ## 상호 베타 집합
 
 # Graph 활용_최소 비용
