@@ -105,42 +105,25 @@ BFS의 경우 - A와 가까운 관계부터 탐색한다.
 #### BFS 구현
 
 > 큐 이용
-```java
-public static void bfs(int v) {      
-		
-		queue.offer(v);             //큐에 시작 정점 추가
-		
-		while(!queue.isEmpty()) {    
-			int n = queue.poll();    
-			
-			if(visit[n]) {continue;}   //방문한 노드면 건너뛰기
-      
-			visit[node] = true;           //큐 삽입시 노드 방문 표시
-			for(int node : graph[n]) {   //인접한 모든 정점 큐에 추가
-      	queue.add(node);  
-      }
-		}	
-		return;
-	}
- ```
+
  ```java
  public static void bfs(int v) {      
 		
-		queue.offer(v);             //큐에 시작 정점 추가
+    queue.offer(v);             //큐에 시작 정점 추가
     visit[v] = true;
 		
-		while(!queue.isEmpty()) {    
-			int n = queue.poll();    
+    while(!queue.isEmpty()) {    
+	int n = queue.poll();    
 		
-			for(int node : graph[n]) {   //인접한 모든 정점 큐에 추가
-        if(!visit[node]){
-          queue.add(node);  
-          visit[node] = true;           //큐 삽입시 노드 방문 표시
-        }    
-      }
-		}	
-		return;
-	}
+	for(int node : graph[n]) {   //인접한 모든 정점 큐에 추가
+		if(!visit[node]){
+		  queue.add(node);  
+		  visit[node] = true;           //큐 삽입시 노드 방문 표시
+		}    
+       }
+    }	
+    return;
+}
  ```
  
   
