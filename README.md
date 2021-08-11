@@ -1,5 +1,6 @@
 # Algorithm_Study
-BOJ 문제풀이 2020.01~
+ + BOJ 문제풀이 2020.01~ </br>
+ + 알고리즘 개념 정리
 
 ## Contents
 |알고리즘 목차|
@@ -12,6 +13,8 @@ BOJ 문제풀이 2020.01~
 |Graph|
 |Greedy|
 
+## Use
+<img src="https://img.shields.io/badge/Java-007396?style=flat-square&logo=Java&logoColor=white"/>
 
 ## References
  + BOJ
