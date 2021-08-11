@@ -270,7 +270,12 @@ public static void prim() {
 ```
 > 구현 코드 2(우선순위 큐 사용 X)
 
+```java
+public statc void prim(){
 
+
+}
+```
 
 ✔️ 언제 사용하면 좋을까?</br>
  + 시간 복잡도 : `O(ElgV)`
@@ -285,13 +290,49 @@ public static void prim() {
 
 ### :pushpin: 알고리즘 과정
  + 우선 비용이 낮은 간선부터 선택해야 하니, 그래프를 가중치의 오름차순으로 정렬
- + 정렬된 간선 순서대로 선택하면서, 간선의 양 끝 정점을 Union 함 => **상호 베타 집합** 활용!
-   + 단, 이때 선택된 두 정점이 같은 집합에 속해있다면 사이클(cycle)이 있다고 판단하고 포함시키지 X
-
+ + 정렬된 간선 순서대로 선택하면서, 간선의 양 끝 정점을 **Union** 함
+   + 단, 이때 선택된 두 정점이 같은 집합에 속해있다면(**Find_Set**) 사이클이 있다고 판단하고 포함시키지 X
+   + `상호 베타 집합` 활용
+ + 1)간선 정보를 담을 배열 `Arraylist<Edge>`, 2)부모 정보를 담을 배열 `parent[]` 필요(자기 자신으로 초기화)
  
-> 구현 코드
+<img src = "https://user-images.githubusercontent.com/71436576/128988461-3352d7fe-dc6b-4879-889c-675a16005f19.png" width=50% height=50%>
 
+> 구현 코드(1)_ 배열 초기화
+```java
+        ArrayList<Edge> list = new ArrayList<>(); 
+	parent = new int[N+1];
+		
+	for(int i = 0 ; i < M ;i++) {   
+		st = new StringTokenizer(br.readLine());
+		int v1 = Integer.parseInt(st.nextToken());  //시작 정점
+		int v2 = Integer.parseInt(st.nextToken());  //끝 정점
+		int w = Integer.parseInt(st.nextToken());   //가중치
+			
+		list.add(new Edge(v1,v2,w));
+	}
 
+	Collections.sort(list);    //엣지 오름차순으로 정렬
+		
+	for(int i = 0; i <= N ; i++) {    //부모 배열 초기화
+		parent[i] = i;
+	}
+```
+> 구현 코드(2)_ 크루스칼 알고리즘
+```java
+      int cnt = 0;
+      for(int i = 0; i < M; i++) {   //간선의 수만큼 loop 진행
+		Edge edge = list.get(i);
+		int a = edge.s;
+		int b = edge.e;
+
+		if(find_Set(a) != find_Set(b)) {    //부모가 다르면(사이클 형성x)
+			union(a,b);                //둘이 합치기
+			cost += edge.w;           //최소 가중치의 합
+			cnt++;
+		}
+		if(cnt == N-1) { break;}      //MST 간선 개수가 N-1이 되면 종료
+	}
+```
 
 ✔️ 언제 사용하면 좋을까?</br>
  + 시간 복잡도 : `O(ElgV)`
