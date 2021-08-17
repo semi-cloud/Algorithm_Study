@@ -73,7 +73,31 @@
 ## 문자열 포멧팅
 
 ### ✔️ String
+```
+String c = a + b;
+```
+ +  + 연산자를 통해 문자열 연결 가능
+ + 🤨 내부적으로 Autoboxing, Unboxing 과정을 통하여 concat 메소드를 참조해 사용하여 느림
+ 
+ > _String은 불변(immutable)한 객체이기 때문에, 내부적으로 계속해서 새로운 String 객체들이 생성되어 메모리 낭비가 심함
 
 ### ✔️ StringBuilder
+```java
+BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(System.out));
 
+StringBuilder stringBuilder = new StringBuilder();
+
+stringBuilder.append("첫번째 문장\n"); 
+stringBuilder.append("두번 재 문장\n");
+bufferedWriter.write(stringBuilder.toString());   // 출력 가능한 String 형태로 변환
+
+bufferedWriter.flush();
+bufferedWriter.close();
+```
+ + `StringBuilder` : _mutable_ 한 객체이므로, append()를 통해 붙일 수 있음
+ + 새로운 객체를 생성하는 과정이 아니므로, 내부적으로 boxing 과정을 거치지 않아 속도가 빠름
+ 
 ### ✔️ StringBuffer
+ + `StringBuffer` : `StringBuilder`와 비슷하지만, _thread-safe_ 한 특징이 있음
+   + 서버를 구성하고, 다중의 사용자가 접근 가능해야할 경우 사용
+   + 내부적으로 Synchronization 적용하는 로직이 존재해 다소 느림
